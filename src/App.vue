@@ -1,28 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Scouts
+      @onScoutSelected="onSelected"
+    />
+    <Scout v-for="scout in scouts" v-bind="scout"  :key="scout.id">
+      {{scout.name}}
+    </Scout>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Scouts from './components/Scouts.vue'
+import Scout from './components/Scout.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Scouts,
+    Scout,
+  },
+  data: () => ({
+    scouts: [],
+  }),
+  methods: {
+    onSelected: function (scout) {
+      this.scouts.push(scout);
+    }
   }
 }
 </script>
 
 <style>
+body {
+  background-color: #31124a;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #ffffff;
+  margin: 16px;
 }
 </style>
